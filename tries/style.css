@@ -1,56 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
 
 *{
     font-family: 'Roboto', sans-serif;
+    margin: 0px;
+    padding: 0px;
 }
-.flex-row{
+
+.flex{
     display: flex;
-    flex-direction: row;
-    overflow: hidden;
 }
 
 .flex-center{
     justify-content: center;
 }
 
-body{
-    background-color: rgb(168, 168, 168);
-    font-size: 15px;
+.flex-row{
+    flex-direction: row;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+.flex-space-between{
+    justify-content: space-between;
 }
 
 .tile{
-    background-color: white;
+    background-color: rgba(255, 195, 0, 1);
     border-radius: 37px;
-    width: 900px;
-    justify-content:space-between;
-    box-sizing: border-box;
-
-}
-
-.tile > img{
-    width: 300px;
-    height: auto;
+    width: 700px;
+    height: 158px;
     overflow: hidden;
 }
 
-.short-description{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 600px;
-    height: 100%;
+.tile > .m_image{
+    width: 260px;
+    height: auto;
+    background-image: url("/hunter.jpg");
+    background-size:auto 191px;
+    background-position-x: center;
+}
+
+.tile > .short-description{
+    width: 440px;
 }
 
 .short-description > h1{
-    margin-top: 8px;
-    margin-bottom: 0px;
+    font-family: 'Roboto', sans-serif;
     text-align: center;
-    font-size: 2.5rem;
+    margin-top: 13px;
+    font-weight: 400;
+    opacity: 76%;
+    margin-bottom: 28px;
 }
 
 .short-description > p{
+    font-family: 'Roboto', sans-serif;
+    margin-left: 36px;
     text-align: left;
-    padding-left: 40px;
-    margin: 0px;
-    margin-top: 10px;
+    font-size: 24px;
 }
+
+
+
+
