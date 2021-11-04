@@ -33,7 +33,72 @@
     border-radius: 37px;
     width: 700px;
     height: 158px;
+    min-height: 158px;
     overflow: hidden;
+    /* margin-bottom: 48px; */
+    transition: ease-in .2s; 
+
+}
+
+.border:hover {
+    transition: ease .2s;
+    transform: Scale(1.2);
+    box-shadow: 19px 20px 9px -2px rgba(255, 123, 0, 0.68);
+    border-width: 3px;
+    background-size: calc(100% + 6px) calc(100% + 6px);
+    background-position-y: -3px;
+    background-position-x: -3px;
+    height: calc(158px + (56px)/1.2);
+}
+
+.border:hover > .tile{
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.border:hover::after{
+    margin: 0px;
+    position: relative;
+    content: "More";
+    text-align: center;
+    width: 700px;
+    min-height: 50px;
+    background-color: rgba(255, 234, 0, 1);
+    width: calc(700px + 6px);
+    left: -3px;
+    bottom: 0px;
+    border-radius: 0px 0px 37px 37px;
+    font-size: 26px;
+}
+
+
+.border{
+    transition: ease-in .2s;
+    width: 700px;
+    height: 158px;
+    border-style: solid;
+    border-width: 0px;
+    border-radius: 37px;
+    border-color: transparent;
+    background-image: linear-gradient(180deg, rgba(255,234,0,1) 0%, rgba(255,123,0,1) 100%);
+    margin-bottom: 48px;
+    /* overflow: hidden; */
+    box-sizing:content-box;
+    margin-top: 14px;
+}
+
+
+/* .border{
+    border-radius: 80px;
+    border-width: 40px;
+    background-image: linear-gradient(white, white), radial-gradient(circle at top left, #f00,#3020ff);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+} */
+
+
+.align-center{
+    align-items: center;
 }
 
 .tile > .m_image{
@@ -62,6 +127,7 @@
     margin-left: 36px;
     text-align: left;
     font-size: 24px;
+    font-weight: 300;
 }
 
 
