@@ -45,7 +45,7 @@
     transform: Scale(1.2);
     box-shadow: 19px 20px 9px -2px rgba(255, 123, 0, 0.68);
     border-width: 3px;
-    background-size: calc(100% + 6px) calc(100% + 6px);
+    background-size: calc(150% + 6px) calc(150% + 6px);
     background-position-y: -3px;
     background-position-x: -3px;
     height: calc(158px + (56px)/1.2);
@@ -69,6 +69,7 @@
     bottom: 0px;
     border-radius: 0px 0px 37px 37px;
     font-size: 26px;
+    transition: inherit;
 }
 
 
