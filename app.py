@@ -25,11 +25,12 @@ def main():
 @app.route("/register")
 def register():
     # this route might get errmsg val which contains error message
-    # if there is such a value function contains it to template, so user will see that
+    # if there is such a value function sends it to template, so user will see that
     errmsg = "No errors"
     if flask.request.args.get("errmsg"):
         errmsg = flask.request.args.get("errmsg")
 
+    return flask.render_template("register.html")
     # just return register html file via flask.render_template function
     return errmsg
     # return flask.render_template("register.html", errmsg = errmsg)

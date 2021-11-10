@@ -1,0 +1,25 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(180deg, #FF7B00 0%, #FFAA00 100%);
+}
+
+.logo{
+    position: fixed;
+    top: 15px;
+    left: 15px;
+}
+
+.m_btn{
+    width: calc(210px*0.6);
+    height: calc(75px*0.6);
+    background-color: black;
+    border-radius: calc(52px*0.7);
+    background-color: #FFAA00;
+}
+
