@@ -30,8 +30,8 @@ def register():
     if flask.request.args.get("errmsg"):
         errmsg = flask.request.args.get("errmsg")
 
-    return flask.render_template("register.html")
     # just return register html file via flask.render_template function
+    return flask.render_template("register.html", errmsg = errmsg)
     return errmsg
     # return flask.render_template("register.html", errmsg = errmsg)
 
