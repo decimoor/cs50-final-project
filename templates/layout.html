@@ -27,11 +27,22 @@
         </filter>
         </defs>
         </svg>
-    
+        <nav>
+            <form action="/register" method="form">
+                {%block nav%}
+
+                <!-- <input class="m_btn" type="submit" name="accout" value="Accout1" disabled>
+                <input class="m_btn log_out" type="submit" name="log_out" value="Log out"> -->
+                {%endblock%}
+            </form>
+        </nav>
+    {% block body%}
+    {%endblock%}
     
     <script
     src="https://code.jquery.com/jquery-3.6.0.js"
     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-    crossorigin="anonymous"></script>    
+    crossorigin="anonymous"></script>
+    <script src="../static/script.js"></script>    
 </body>
 </html>

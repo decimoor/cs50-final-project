@@ -1,0 +1,22 @@
+{%extends "layout.html"%}
+
+
+
+{%block body%}
+
+{{errmsg}}
+
+<!-- using this div to center registration window in center of screen -->
+<div class="content_container">
+    <!-- registration window itself -->
+    <div class="registration-window">
+        <form action="/registered" method="form">
+            <input type="text" name="username" placeholder="Username">
+            <input type="text" name="password" placeholder="Password">
+            <input type="text" name="password-confirm" placeholder="Confirm">
+            <input type="submit" name="Register">
+        </form>
+    </div>
+</div>
+
+{%endblock%}

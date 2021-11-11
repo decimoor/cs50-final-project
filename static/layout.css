@@ -21,6 +21,24 @@ body{
     background-color: black;
     border-radius: calc(52px*0.7);
     background-color: #FFAA00;
+    border-style: none;
 }
 
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 10px;
+    overflow: hidden;
+    width: 100vw;
+}
 
+nav > form > input:nth-child(2){
+    margin-right: 30px;
+}
+
+nav > form > input{
+    color: #FFEA00;
+    font-size: 18px;
+    margin-right: 5px;
+}

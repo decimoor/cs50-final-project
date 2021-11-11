@@ -19,10 +19,10 @@ def main():
         return "Hello, mate!"
         # reloads page
     # returns main web page if not argiments were passed
-    return "Hello, mate!"
+    return "Hello, mate!"   
 
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
     # this route might get errmsg val which contains error message
     # if there is such a value function sends it to template, so user will see that
