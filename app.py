@@ -32,8 +32,6 @@ def register():
 
     # just return register html file via flask.render_template function
     return flask.render_template("register.html", errmsg = errmsg)
-    return errmsg
-    # return flask.render_template("register.html", errmsg = errmsg)
 
 @app.route("/registered")
 def registered():
