@@ -9,7 +9,7 @@ def LoginRequired(func):
     def DecoratedFunction(*args, **kwargs):
         if flask.request.args.get("user_id"):
             return func(*args, **kwargs)
-        return "You didn't log in"
+        return flask.render_template("register.html")
 
     return DecoratedFunction
 
