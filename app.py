@@ -71,7 +71,9 @@ def registered():
     if help.CheckExisting(username):
         return flask.redirect("/register?errmsg=Such a username alredy exists")
     if password != confirmation:
-        return flask.redirect("/register?errmsg=check password once more")
+        return flask.redirect("/register?errmsg=Check password once more")
+    if password in ["Alim", "Petya"]:
+        flask.redirect("/register?errmsg=Your names sucks pls change")
     # load info to db
     help.AddRowToUserTable(name = username, password = password, favourite_title = favouriteTitle)
     return "You are registered!"
