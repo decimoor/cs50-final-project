@@ -1,10 +1,13 @@
 import flask
 import help
 import sqlite3
+import m_imdb
+import json
 
 sqliteConnection = sqlite3.connect("anime.db")
 
 app = flask.Flask(__name__)
+
 
 @app.route("/")
 @help.LoginRequired
@@ -22,6 +25,14 @@ def main():
     return "Hello, mate!"   
 
 
+# get anime list function
+@app.route("/getAnimeList", methods=["GET", "POST"])
+def getAnimeList():
+    titleName = flask.request.args.get("titleName")
+    matchesTitles = m_imdb.GetAnimeList(titleName)
+    return json.dumps(matchesTitles)
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     # this route might get errmsg val which contains error message
@@ -33,7 +44,8 @@ def register():
     # just return register html file via flask.render_template function
     return flask.render_template("register.html", errmsg = errmsg)
 
-@app.route("/registered")
+
+@app.route("/registered", methods=["GET", "POST"])
 def registered():
     # checking user input
     # check if user didn't write any info
@@ -45,8 +57,23 @@ def registered():
         return flask.redirect("/register?errmsg=You didn't write your username")
     if not flask.request.form.get("password"):
         return flask.redirect("/register?errmsg=You didn't write your password")
-    if not flask.request.form.get("confirmation"):
+    if not flask.request.form.get("password-confirmation"):
         return flask.redirect("/register?errmsg=You didn't confirm your password")
+    if not flask.request.form.get("favourite_title"):
+        return flask.redirect("/register?errmsg=You didn't choose your favourite anime")
+    
+    username = flask.request.form.get("username")
+    password = flask.request.form.get("password")
+    confirmation = flask.request.form.get("password-confirmation")
+    favouriteTitle = flask.request.form.get("favourite_title")
 
+    print(password, confirmation)
+    if help.CheckExisting(username):
+        return flask.redirect("/register?errmsg=Such a username alredy exists")
+    if password != confirmation:
+        return flask.redirect("/register?errmsg=Check password once more")
+    if password in ["Alim", "Petya"]:
+        flask.redirect("/register?errmsg=Your names sucks pls change")
     # load info to db
-
+    help.AddRowToUserTable(name = username, password = password, favourite_title = favouriteTitle)
+    return "You are registered!"

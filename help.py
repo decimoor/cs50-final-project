@@ -3,6 +3,8 @@ import requests
 import flask
 import sqlite3
 
+
+
 def LoginRequired(func):
     @wraps(func)
 
@@ -14,16 +16,27 @@ def LoginRequired(func):
     return DecoratedFunction
 
 
-def AddRowToUserTable(sqlConnection, **kwargs):
+def AddRowToUserTable(**kwargs):
     possibleKeys = ["name", "password", "favourite_title", "id"]
     for key in kwargs:
         if key not in possibleKeys:
             raise TypeError(key + " is wrong key")
-
-    db = sqlConnection.cursor()
-    db.execute(f'INSERT INTO users(name, password, favourite_title, id) VALUES(\"{kwargs["name"]}\", \"{kwargs["password"]}\" , \"{kwargs["favourite_title"]}\", {kwargs["id"]})')
-    sqlConnection.commit()
+    sqlconnection = sqlite3.Connection("anime.db")
+    db = sqlconnection.cursor()
+    db.execute(f'INSERT INTO users(name, password, favourite_title) VALUES(\"{kwargs["name"]}\", \"{kwargs["password"]}\" , \"{kwargs["favourite_title"]}\")')
+    sqlconnection.commit()
     # for i in kwargs.values():
-        
-sqlCon = sqlite3.connect("anime.db")
-AddRowToUserTable(sqlCon, name="Dima", password="Ya gey", favourite_title="Call me by your name", id=69)
+
+def CheckExisting(name):
+    sqlconnection = sqlite3.Connection("anime.db")
+    db = sqlconnection.cursor()
+    names = db.execute(f'SELECT name FROM users').fetchall()
+
+    for iter in names:
+        if name in iter[0]:
+            return True
+    
+    sqlconnection.commit()
+    return False
+
+# AddRowToUserTable(name = "Olzhas", password = "altaireiloveu", favourite_title = "Boku no Piko")
