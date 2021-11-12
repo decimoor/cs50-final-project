@@ -6,8 +6,6 @@
 {%endblock%}
 {%block body%}
 
-{{errmsg}}
-
 <!-- using this div to center registration window in center of screen -->
 <div class="content_container">
     <!-- registration window itself -->
@@ -29,6 +27,9 @@
                                         padding-left: 0px;"
                                         type="submit" name="Register" value="Register">
         </form> 
+    </div>
+    <div class="error">
+        <p>{{errmsg}}</p>
     </div>
 </div>
 
