@@ -6,10 +6,10 @@ def GetAnimeList(titleName):
         matches = []
         counter = 0
         for title in data:
-            if titleName in title["title"].lower():
+            if titleName.lower() in title["title"].lower():
                 matches.append(title["title"])
                 counter += 1
-            if counter > 10:
+            if counter > 5:
                 break
     return matches
 
@@ -23,11 +23,3 @@ def GetAnimeFullInfo(titleName):
                 return title
         raise("Couldn't find that anime in database")
 
-
-while True:
-    titleName = input("Enter title: ")
-    titles = GetAnimeList(titleName)
-    for title in titles:
-        print(title)
-    choose = int(input("Choose title: "))
-    print(GetAnimeFullInfo(titles[choose - 1])["picture"])
