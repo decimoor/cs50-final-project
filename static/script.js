@@ -1,8 +1,3 @@
-$(".log_out").click(function () { 
-    ajax
-    
-});
-
 window.onload = () =>{
     console.log($(".error").html())
     if ($(".error").html().includes("<p>No errors</p>"))
