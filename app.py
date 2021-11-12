@@ -8,6 +8,7 @@ sqliteConnection = sqlite3.connect("anime.db")
 
 app = flask.Flask(__name__)
 
+
 @app.route("/")
 @help.LoginRequired
 def main():
@@ -31,6 +32,7 @@ def getAnimeList():
     matchesTitles = m_imdb.GetAnimeList(titleName)
     return json.dumps(matchesTitles)
 
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     # this route might get errmsg val which contains error message
@@ -41,6 +43,7 @@ def register():
 
     # just return register html file via flask.render_template function
     return flask.render_template("register.html", errmsg = errmsg)
+
 
 @app.route("/registered", methods=["GET", "POST"])
 def registered():
@@ -69,6 +72,6 @@ def registered():
         return flask.redirect("/register?errmsg=Such a username alredy exists")
     if password != confirmation:
         return flask.redirect("/register?errmsg=check password once more")
-    
-    return "Good job!"
     # load info to db
+    help.AddRowToUserTable(name = username, password = password, favourite_title = favouriteTitle)
+    return "You are registered!"

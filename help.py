@@ -23,7 +23,7 @@ def AddRowToUserTable(**kwargs):
             raise TypeError(key + " is wrong key")
     sqlconnection = sqlite3.Connection("anime.db")
     db = sqlconnection.cursor()
-    db.execute(f'INSERT INTO users(name, password, favourite_title, id) VALUES(\"{kwargs["name"]}\", \"{kwargs["password"]}\" , \"{kwargs["favourite_title"]}\", {kwargs["id"]})')
+    db.execute(f'INSERT INTO users(name, password, favourite_title) VALUES(\"{kwargs["name"]}\", \"{kwargs["password"]}\" , \"{kwargs["favourite_title"]}\")')
     sqlconnection.commit()
     # for i in kwargs.values():
 
@@ -38,3 +38,5 @@ def CheckExisting(name):
     
     sqlconnection.commit()
     return False
+
+# AddRowToUserTable(name = "Olzhas", password = "altaireiloveu", favourite_title = "Boku no Piko")
