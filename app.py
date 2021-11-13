@@ -77,3 +77,4 @@ def registered():
     # load info to db
     help.AddRowToUserTable(name = username, password = password, favourite_title = favouriteTitle)
     return "You are registered!"
+g

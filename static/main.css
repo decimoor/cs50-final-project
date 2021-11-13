@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
+
+*{
+    font-family: 'Roboto', sans-serif;
+    margin: 0px;
+    padding: 0px;
+    /* transition: ease .5s; */
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.m_main_content{
+    width: calc(839px*0.6);
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(684px*0.6);
+    background-color: #FFC300;
+    overflow: hidden;
+    border-radius: 34px;
+}
+
+.photo-and-description{
+    margin-right: 10px;
+    width: calc(684px*0.6);
+    height: calc(158px*0.6);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.m_image{
+    width: calc(260px*0.6);
+    height: calc(158px*0.6);
+    background-image: url("/tries/hunter.jpg");
+    background-position:center;
+    background-size: cover;
+}
+
+.short_description{
+    width: calc((684px - 260px)*0.6);
+    height: calc(158px*0.6);    
+    padding-right: 15px;
+}
+
+.short-description > h1{
+    font-size: 24px;
+    margin-bottom: 15px;
+    margin-top: 8px;
+    font-weight: 400;
+}
+
+.border{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    background-image: linear-gradient(180deg, rgba(255,234,0,1) 0%, rgba(255,123,0,1) 100%);
+    border-radius: 34px;
+    transition: padding ease .1s;
+}
+
+.user_comment{
+    content: "This title is good as hell";
+    animation: ease .3s;
+    animation-name: lengthen;
+    height: calc(389px*0.6);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-color: #FFAA00;
+    transition: ease-in .3s;
+}
+
+.m_main_content > h3{
+    text-align: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.tile{
+    padding-right: 12px;
+}
+
+.m_more_button{
+    
+    transition: ease .2s;
+    padding-top: 10px;
+}
+
+.m_more_button_inactive{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all ease .2s;
+}
+
+/* animation */
+@keyframes lengthen {
+    from{
+        height: 0px;
+    }
+    to{
+        height: calc(389px*0.6); 
+    }
+}
+
+.watched{
+    margin-bottom: 20px;
+}
