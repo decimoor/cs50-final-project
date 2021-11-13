@@ -46,7 +46,7 @@ body{
 .m_image{
     width: calc(260px*0.6);
     height: calc(158px*0.6);
-    background-image: url("/tries/hunter.jpg");
+    background-image: url("../data/hunter.jpg");
     background-position:center;
     background-size: cover;
 }
@@ -124,4 +124,26 @@ body{
 
 .watched{
     margin-bottom: 20px;
+}
+
+.add-tile-button{
+    position: absolute;
+    width: calc(453px*0.6);
+    height: calc(118px*0.6);
+    right: calc(82px*0.6);
+    bottom: calc(70px*0.6);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFDD00;
+    border-radius: 37px;
+    font-size: 25px;
+    transition: ease-in .2s;
+}
+
+.add-tile-button:hover{
+    box-shadow: 0px 0px 0px 10px rgba(255, 221, 0, 0.5);
+    transition: ease-in .2s;
+    transform: scale(1.1);
 }

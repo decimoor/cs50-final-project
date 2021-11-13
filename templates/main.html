@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/layout.css">
-    <link rel="stylesheet" href="../static/main.css">
-    <!-- {%block link%}
+{%extends "layout.html"%}
+    
+    {%block link%}
+        <link rel="stylesheet" href="../static/main.css">
+        <title>Anime Watch List</title>
+    {%endblock%}
 
-    {%endblock%} -->
-    <title>Anime Watch List</title>
-</head>
-<body>
+    {%block nav%}
+
+    <input class="m_btn" type="submit" name="accout" value="Accout" disabled>
+    <input class="m_btn log_out" type="submit" name="log_out" value="Log out">
+    {%endblock%}
+
+{%block body%}
     <svg class="logo" width="133" height="78" viewBox="0 0 133 78" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect y="14.8389" width="26.0513" height="69.1542" transform="rotate(-34.722 0 14.8389)" fill="#FFDD00"/>
         <rect x="39.6372" y="15.1533" width="26.0513" height="69.1542" transform="rotate(-34.722 39.6372 15.1533)" fill="#FFDD00"/>
@@ -31,14 +31,9 @@
         </filter>
         </defs>
         </svg>
-    <nav>
-        <form action="/register" method="form">
-            <!-- {%block nav%} -->
-
-            <input class="m_btn" type="submit" name="accout" value="Accout" disabled>
-            <input class="m_btn log_out" type="submit" name="log_out" value="Log out">
-            <!-- {%endblock%} -->
-        </form> -->
+    
+            
+        
     </nav>
     <div class="m_main_content">
         <h3>Watched</h3>
@@ -62,14 +57,12 @@
         <h3>Unwatched</h3>
         
     </div>
-    <!-- {% block body%}
-    {%endblock%} -->
+
+    <div class="add-tile-button m_button">Add Title</div>
     
-    <script
-    src="https://code.jquery.com/jquery-3.6.0.js"
-    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-    crossorigin="anonymous"></script>
+
+    {%endblock%} -->
+{%block scripts%}
     <script src="../static/script.js"></script>    
     <script src="../static/main.js"></script>
-</body>
-</html>
+{%endblock%}

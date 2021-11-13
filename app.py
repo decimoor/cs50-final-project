@@ -76,5 +76,4 @@ def registered():
         flask.redirect("/register?errmsg=Your names sucks pls change")
     # load info to db
     help.AddRowToUserTable(name = username, password = password, favourite_title = favouriteTitle)
-    return "You are registered!"
-g
+    return flask.render_template("main.html", watchedTitles = "")
