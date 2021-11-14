@@ -16,6 +16,19 @@ def LoginRequired(func):
     return DecoratedFunction
 
 
+def AddRowToTitlesTable(**kwargs):
+    """
+    title_name, picture, tags
+    """
+    possibleKeys = ["title_name", "picture", "tags"]
+    for key in kwargs:
+        if key not in possibleKeys:
+            raise TypeError(key + " is wrong key")
+    sqlConnection = sqlite3.Connection("anime.db")
+    db = sqlConnection.cursor()
+    db.execute(f'INSERT INTO titles(title_name, picture, tags) VALUES(\"{kwargs["title_name"]}\", \"{kwargs["picture"]}\", \"{kwargs["tags"]}\")')
+    sqlConnection.commit()
+
 def AddRowToUserTable(**kwargs):
     possibleKeys = ["name", "password", "favourite_title", "id"]
     for key in kwargs:
@@ -40,3 +53,9 @@ def CheckExisting(name):
     return False
 
 # AddRowToUserTable(name = "Olzhas", password = "altaireiloveu", favourite_title = "Boku no Piko")
+def GetTitlesLike(titleName):
+    sqlconnection = sqlite3.Connection("anime.db")
+    db = sqlconnection.cursor()
+    names = db.execute(f'SELECT * FROM titles WHERE title_name LIKE \'{titleName}%\' ').fetchall() 
+    sqlconnection.commit()
+    return names

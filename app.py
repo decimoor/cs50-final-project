@@ -1,3 +1,4 @@
+from re import match
 import flask
 import help
 import sqlite3
@@ -30,6 +31,7 @@ def main():
 def getAnimeList():
     titleName = flask.request.args.get("titleName")
     matchesTitles = m_imdb.GetAnimeList(titleName)
+    print(matchesTitles)
     return json.dumps(matchesTitles)
 
 

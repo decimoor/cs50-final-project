@@ -1,4 +1,5 @@
-function AnimeList(){
+$(".anime-list-text-field").keyup(function(){
+    console.log("keypress function")
     titleName = $(".anime-list-text-field").val()
     $.ajax(`/getAnimeList?titleName=${titleName}`,
         {        
@@ -15,7 +16,5 @@ function AnimeList(){
                 }
             }
         }
-    );
-}
-
-setInterval(AnimeList, 1000)
+    )
+})

@@ -22,7 +22,7 @@
                                         type="password" name="password-confirmation" placeholder="Confirm">
             <input class="m_btn anime-list-text-field" list="titles" style="width: calc(485px*0.6);
                                         height: calc(81px*0.6);"
-                                         type="text" name="favourite_title" placeholder="Your Facourite Title">
+                                         type="text" name="favourite_title" placeholder="Your Favourite Title">
             <datalist class="m_btn" name="f" id="titles" style="width: calc(485px*0.6);
                                                         height: calc(81px*0.6);">
                 <option value="Hunter X Hunter">Hunter X Hunter</option>
@@ -44,6 +44,8 @@
     </div>
 </div>
 
-<script src="../static/register.js"></script>
 
+{%endblock%}
+{%block scripts %}
+<script src="../static/register.js"></script>
 {%endblock%}
