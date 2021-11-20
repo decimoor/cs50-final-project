@@ -9,6 +9,21 @@ sqliteConnection = sqlite3.connect("anime.db")
 
 app = flask.Flask(__name__)
 
+WATCHED_TITLES = [
+    {
+        "titleName": "Shaman King",
+        "rating": "­♣♣♣♣♣",
+        "tags": "Shonen, Charismatic Hero, ..."
+    }
+]
+UNWATCHED_TITLES = [
+    {
+        "titleName": "Jujutsu Kaisen",
+        "rating": "♣♣♣♣♣",
+        "tags": "Shonen, sexy main hero, ..."
+    }
+]
+
 
 @app.route("/")
 @help.LoginRequired
@@ -23,7 +38,7 @@ def main():
         return "Hello, mate!"
         # reloads page
     # returns main web page if not argiments were passed
-    return "Hello, mate!"   
+    return flask.render_template("main.html", title = UNWATCHED_TITLES[0])   
 
 
 # get anime list function
@@ -78,4 +93,4 @@ def registered():
         flask.redirect("/register?errmsg=Your names sucks pls change")
     # load info to db
     help.AddRowToUserTable(name = username, password = password, favourite_title = favouriteTitle)
-    return flask.render_template("main.html", watchedTitles = "")
+    return flask.redirect(f"/?user_id={help.GetUserId(username)}")

@@ -38,7 +38,6 @@ def AddRowToUserTable(**kwargs):
     db = sqlconnection.cursor()
     db.execute(f'INSERT INTO users(name, password, favourite_title) VALUES(\"{kwargs["name"]}\", \"{kwargs["password"]}\" , \"{kwargs["favourite_title"]}\")')
     sqlconnection.commit()
-    # for i in kwargs.values():
 
 def CheckExisting(name):
     sqlconnection = sqlite3.Connection("anime.db")
@@ -52,10 +51,19 @@ def CheckExisting(name):
     sqlconnection.commit()
     return False
 
-# AddRowToUserTable(name = "Olzhas", password = "altaireiloveu", favourite_title = "Boku no Piko")
 def GetTitlesLike(titleName):
     sqlconnection = sqlite3.Connection("anime.db")
     db = sqlconnection.cursor()
     names = db.execute(f'SELECT * FROM titles WHERE title_name LIKE \'{titleName}%\' ').fetchall() 
     sqlconnection.commit()
     return names
+
+def GetUserId(userName):
+    sqlconnection = sqlite3.Connection("anime.db")
+    db = sqlconnection.cursor()
+    names = db.execute(f'SELECT id FROM users WHERE name = \'{userName}\' ').fetchall() 
+    sqlconnection.commit()
+    return int(names[0][0])
+
+
+print(GetUserId("Rashid"))
