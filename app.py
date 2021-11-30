@@ -133,3 +133,8 @@ def AddTitle():
             "id": titleInfo[0],
             "name": titleInfo[1],
         }
+        # debug version
+        help.AddToUnwatchedTitles(title, 4)
+        # release version
+        # help.AddToUnwatchedTitles(title, session["user_id"])
+        return "Successfully added title to unwatched titles"

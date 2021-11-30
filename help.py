@@ -147,15 +147,6 @@ def AddToWatchedTitles(title):
 def AddToUnwatchedTitles(title, userId):
     sqlconnection = sqlite3.Connection("anime.db")
     db = sqlconnection.cursor()
-    # !!! this is debug function !!!
-    db.execute(f'INSERT INTO unwatched_titles (owners_id, title_id) VALUES(4, {title["id"]})')
-    # proper version of function looks like this 
-    # db.execute(f'INSERT INTO watched_titles (owners_id, title_id) VALUES(userId, {title["id"]})')
+    db.execute(f'INSERT INTO unwatched_titles (owners_id, title_id) VALUES({userId}, {title["id"]})')
     sqlconnection.commit()
 
-
-tmp = {
-    "id": 51
-}
-
-AddToUnwatchedTitles(tmp, 1)
