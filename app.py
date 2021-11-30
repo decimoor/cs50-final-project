@@ -9,22 +9,6 @@ sqliteConnection = sqlite3.connect("anime.db")
 
 app = flask.Flask(__name__)
 
-WATCHED_TITLES = [
-    {
-        "titleName": "Shaman King",
-        "rating": "­♣♣♣♣♣",
-        "tags": "Shonen, Charismatic Hero, ..."
-    }
-]
-UNWATCHED_TITLES = [
-    {
-        "titleName": "Jujutsu Kaisen",
-        "rating": "♣♣♣♣♣",
-        "tags": "Shonen, sexy main hero, ..."
-    }
-]
-
-
 @app.route("/")
 @help.LoginRequired
 def main():
@@ -92,5 +76,50 @@ def registered():
     if password in ["Alim", "Petya"]:
         flask.redirect("/register?errmsg=Your names sucks pls change")
     # load info to db
+    flask.session["id"] = help.GetUserId(username)
     help.AddRowToUserTable(name = username, password = password, favourite_title = favouriteTitle)
     return flask.redirect(f"/?user_id={help.GetUserId(username)}")
+
+
+@app.route("/getTitles", methods = ["POST", "GET"])
+def GetTitles():
+    # !!! this is debug version of the function !!!
+    # the proper version of function looks this way
+    # watchedTitles = help.GetWatchedTitles(flask.session["user_id"])
+    watchedTitles = help.GetWatchedTitles(4)
+    print(watchedTitles)
+    return str(watchedTitles)
+
+
+
+@app.route("/AddTitle", methods = ["POST", "GET"])
+def AddTitle():
+    
+    
+    # Title's layout
+    # [0] - id
+    # [1] - name
+    # [2] - picture's url
+    # [3] - tags
+
+
+    # check if there is title's name
+    if not flask.request.form.get("titleName"):
+        return flask.redirect("/main?errmsg=You didn't wrote titleName")
+    
+    titleInfo = help.GetTitle(flask.request.form.get("titleName"))
+    # check if there is a rating and description (available only if it's watched title)
+    if flask.request.form.get("mode") == "watched":
+        if not flask.request.form.get("rating"):
+            return flask.redirect("/main?errmsg=You didn't select rating")
+        if not flask.request.form.get("description"):
+            return flask.redirect("/main?errmsg=You didn't write description")
+        # adding this title to user's watched titles database
+        title = {
+            "id": titleInfo[0],
+            "name": titleInfo[1],
+            "rating": int(flask.request.form.get("rating")),
+            "description": flask.request.form.get("description")
+        }
+        help.AddToWatchedTitles(title)
+        return "Successfully added title to watched titles"

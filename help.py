@@ -4,6 +4,11 @@ import flask
 import sqlite3
 
 
+# Title's layout
+# [0] - id
+# [1] - picture's url
+# [2] - tags
+
 
 def LoginRequired(func):
     @wraps(func)
@@ -15,6 +20,45 @@ def LoginRequired(func):
 
     return DecoratedFunction
 
+
+def GetWatchedTitles(userID):
+    sqlconnection = sqlite3.Connection("anime.db")
+    db = sqlconnection.cursor()
+    titles = db.execute(f'SELECT * FROM watched_titles WHERE owners_id = {userID}').fetchall()
+    sqlconnection.commit()
+    titlesDicts = []
+    for title in titles:
+        titleElement = db.execute(f'SELECT * FROM titles WHERE id = {title[1]}').fetchall()[0]
+        sqlconnection.commit()
+        titleDict = {
+            "titleName": titleElement[1],
+            "description": title[3],
+            "rating": title[2],
+            "img": titleElement[2],
+            "tags": titleElement[3]
+        }
+        titlesDicts.append(titleDict)
+
+
+    # function returns a list where every element represents next dictionary
+    # titleName
+    # description
+    # rating
+    # img
+    # tags
+
+    return titlesDicts
+
+def GetTitle(titleName):
+    sqlconnection = sqlite3.Connection("anime.db")
+    db = sqlconnection.cursor()
+    title = db.execute(f'SELECT * FROM titles WHERE title_name LIKE \'{titleName}%\'').fetchall()
+    # check if it could found anything
+    if len(title) == 0:
+        print("Couldn't find anything")
+    sqlconnection.commit()
+    # we return only 0 becouse there is only one element
+    return title[0]
 
 def AddRowToTitlesTable(**kwargs):
     """
@@ -66,4 +110,11 @@ def GetUserId(userName):
     return int(names[0][0])
 
 
-print(GetUserId("Rashid"))
+def AddToWatchedTitles(title):
+    sqlconnection = sqlite3.Connection("anime.db")
+    db = sqlconnection.cursor()
+    # !!!this is release function !!!
+    # db.execute(f'INSERT INTO watched_titles (owners_id, title_id, rating, description) VALUES({flask.session["id"]}, {title["id"]}, {title["rating"]}, {title["description"]}')
+    # !!! this is debug function !!!
+    db.execute(f'INSERT INTO watched_titles (owners_id, title_id, rating, description) VALUES(4, {title["id"]}, {title["rating"]}, \'{title["description"]}\')')
+    sqlconnection.commit()
