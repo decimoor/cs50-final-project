@@ -83,6 +83,11 @@ def registered():
 
 @app.route("/getTitles", methods = ["POST", "GET"])
 def GetTitles():
+    if flask.request.form.get("mode") == "unwatched":
+        # !!! this is debug version of the function !!!
+        # the proper version of function looks this wat
+        # help.GetUnwatchedTitles(flask.session["user_id"])
+        return str(help.GetUnwatchedTitles(4))
     # !!! this is debug version of the function !!!
     # the proper version of function looks this way
     # watchedTitles = help.GetWatchedTitles(flask.session["user_id"])
@@ -123,3 +128,8 @@ def AddTitle():
         }
         help.AddToWatchedTitles(title)
         return "Successfully added title to watched titles"
+    if flask.request.form.get("mode") == "unwatched":
+        title = {
+            "id": titleInfo[0],
+            "name": titleInfo[1],
+        }

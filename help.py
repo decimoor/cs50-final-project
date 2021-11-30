@@ -49,11 +49,36 @@ def GetWatchedTitles(userID):
 
     return titlesDicts
 
+def GetUnwatchedTitles(userID):
+    sqlconnection = sqlite3.Connection("anime.db")
+    db = sqlconnection.cursor()
+    titles = db.execute(f'SELECT * FROM unwatched_titles WHERE owners_id = {userID}').fetchall()
+    sqlconnection.commit()
+    titlesDicts = []
+    for title in titles:
+        titleElement = db.execute(f'SELECT * FROM titles WHERE id = {title[1]}').fetchall()[0]
+        sqlconnection.commit()
+        titleDict = {
+            "titleName": titleElement[1],
+            "img": titleElement[2],
+            "tags": titleElement[3]
+        }
+        titlesDicts.append(titleDict)
+
+
+    # function returns a list where every element represents next dictionary
+    # titleName
+    # img
+    # tags
+
+    return titlesDicts
+
+
 def GetTitle(titleName):
     sqlconnection = sqlite3.Connection("anime.db")
     db = sqlconnection.cursor()
     title = db.execute(f'SELECT * FROM titles WHERE title_name LIKE \'{titleName}%\'').fetchall()
-    # check if it could found anything
+    # check if it could find anything
     if len(title) == 0:
         print("Couldn't find anything")
     sqlconnection.commit()
@@ -118,3 +143,19 @@ def AddToWatchedTitles(title):
     # !!! this is debug function !!!
     db.execute(f'INSERT INTO watched_titles (owners_id, title_id, rating, description) VALUES(4, {title["id"]}, {title["rating"]}, \'{title["description"]}\')')
     sqlconnection.commit()
+
+def AddToUnwatchedTitles(title, userId):
+    sqlconnection = sqlite3.Connection("anime.db")
+    db = sqlconnection.cursor()
+    # !!! this is debug function !!!
+    db.execute(f'INSERT INTO unwatched_titles (owners_id, title_id) VALUES(4, {title["id"]})')
+    # proper version of function looks like this 
+    # db.execute(f'INSERT INTO watched_titles (owners_id, title_id) VALUES(userId, {title["id"]})')
+    sqlconnection.commit()
+
+
+tmp = {
+    "id": 51
+}
+
+AddToUnwatchedTitles(tmp, 1)
