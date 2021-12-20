@@ -5,8 +5,7 @@ $(".m_more_button_inactive").click(function() {
     {
         $(this).parent().children(".user_comment").html("")
         $(".user_comment").html("")
-        $(this).parent().children(".user_comment").css("height", "0px")
-        $(this).parent().children(".user_comment").css("padding", "0px")
+        $(this).parent().children(".user_comment").css("height", "0px").css("padding", "0px")
         $(this).parent().children(".user_comment_inactive").removeClass(".user_comment")
         $(this).html("More")
         moreButtonInnerHTML = "More"
@@ -32,6 +31,17 @@ $(".border").mouseover(function(){
 
 $(".border").mouseleave(function(){
     $(this).css("padding", "0px")
-    $(this).children(".tile").children(".m_more_button_inactive").removeClass(".m_more_button").html("")
-    $(this).children(".tile").children(".m_more_button_inactive").css("height", "0px")
+    $(this).children(".tile").children(".m_more_button_inactive").removeClass(".m_more_button").html("").css("height", "0px")
 })
+
+// function to load images 
+
+
+$.ajax({
+    type: "post",
+    url: "route",
+    dataType: "json",
+    success: function (response) {
+        // function that executes when call gets response
+    }
+});

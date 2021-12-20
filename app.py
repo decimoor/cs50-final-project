@@ -93,7 +93,7 @@ def GetTitles():
     # watchedTitles = help.GetWatchedTitles(flask.session["user_id"])
     watchedTitles = help.GetWatchedTitles(4)
     print(watchedTitles)
-    return str(watchedTitles)
+    return json.dumps(watchedTitles)
 
 
 
