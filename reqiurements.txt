@@ -1,1 +1,4 @@
 flask
+json
+sqlite3
+re
