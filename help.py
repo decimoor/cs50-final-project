@@ -14,7 +14,8 @@ def LoginRequired(func):
     @wraps(func)
 
     def DecoratedFunction(*args, **kwargs):
-        if flask.request.args.get("user_id"):
+        print(flask.session.get("id"))
+        if flask.session.get("id"):
             return func(*args, **kwargs)
         return flask.render_template("register.html", errmsg="No errors")
         # above is older version 
