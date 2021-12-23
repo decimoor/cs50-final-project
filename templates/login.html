@@ -1,0 +1,38 @@
+{%extends "layout.html"%}
+
+
+{%block link%}
+    <link rel="stylesheet" href="../static/register.css">
+{%endblock%}
+{%block body%}
+
+<!-- using this div to center registration window in center of screen -->
+<div class="content_container">
+    <!-- registration window itself -->
+    <div class="registration-window">
+        <form action="/login" method="post">
+            <input class="m_btn" style="width: calc(485px*0.6);
+                                        height: calc(81px*0.6);"
+                                         type="text" name="username" placeholder="Username">
+            <input class="m_btn" style="width: calc(485px*0.6);
+                                        height: calc(81px*0.6);"
+                                        type="password" name="password" placeholder="Password">
+            
+            <input class="m_btn" style="width: calc(244px*0.6);
+                                        height: calc(59px*0.6);
+                                        background-color: #FFDD00;
+                                        color: #FF7E00;
+                                        padding-left: 0px;"
+                                        type="submit" name="Log In" value="Log In">
+        </form> 
+    </div>
+    <div class="error">
+        <p>{{errmsg}}</p>
+    </div>
+</div>
+
+
+{%endblock%}
+{%block scripts %}
+<script src="../static/register.js"></script>
+{%endblock%}
