@@ -37,11 +37,11 @@ $(".border").mouseleave(function(){
 // function to load images 
 
 
-$.ajax({
-    type: "post",
-    url: "route",
-    dataType: "json",
-    success: function (response) {
-        // function that executes when call gets response
-    }
-});
+// $.ajax({
+//     type: "post",
+//     url: "route",
+//     dataType: "json",
+//     success: function (response) {
+//         // function that executes when call gets response
+//     }
+// });
