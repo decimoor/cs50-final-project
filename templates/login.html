@@ -3,6 +3,7 @@
 
 {%block link%}
     <link rel="stylesheet" href="../static/register.css">
+    <link rel="stylesheet" href="../static/login.css">
 {%endblock%}
 {%block body%}
 
@@ -10,6 +11,7 @@
 <div class="content_container">
     <!-- registration window itself -->
     <div class="registration-window">
+        <p id="login_title">Login</p>
         <form action="/loginned" method="post">
             <input class="m_btn" style="width: calc(485px*0.6);
                                         height: calc(81px*0.6);"
@@ -18,13 +20,15 @@
                                         height: calc(81px*0.6);"
                                         type="password" name="password" placeholder="Password">
             
-            <input class="m_btn" style="width: calc(244px*0.6);
-                                        height: calc(59px*0.6);
+            <input class="m_btn" id="login_button" style="width: calc(354px*0.6);
+                                        height: calc(94px*0.6);
                                         background-color: #FFDD00;
                                         color: #FF7E00;
-                                        padding-left: 0px;"
+                                        padding-left: 0px;
+                                        font-size: 1.3rem;"
                                         type="submit" name="Log In" value="Log In">
         </form> 
+        <a href="/register">I don't have an account</a>
     </div>
     <div class="error">
         <p>{{errmsg}}</p>

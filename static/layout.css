@@ -7,6 +7,7 @@ body{
     width: 100vw;
     height: 100vh;
     background: linear-gradient(180deg, #FF7B00 0%, #FFAA00 100%);
+    overflow: hidden;
 }
 
 .logo{
@@ -22,6 +23,15 @@ body{
     border-radius: calc(52px*0.7);
     background-color: #FFAA00;
     border-style: none;
+    margin-bottom: 3px;
+    transition: ease-in .2s;
+}
+
+.m_btn:hover
+{
+    box-shadow: 0px 0px 0px 10px rgba(255, 221, 0, 0.5);
+    transition: ease-in .2s;
+    transform: scale(1.1);
 }
 
 nav{

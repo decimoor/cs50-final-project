@@ -124,11 +124,11 @@ def GetTitles():
         # !!! this is debug version of the function !!!
         # the proper version of function looks this wat
         # help.GetUnwatchedTitles(flask.session["user_id"])
-        return str(help.GetUnwatchedTitles(4))
+        return str(help.GetUnwatchedTitles(1))
     # !!! this is debug version of the function !!!
     # the proper version of function looks this way
     # watchedTitles = help.GetWatchedTitles(flask.session["user_id"])
-    watchedTitles = help.GetWatchedTitles(4)
+    watchedTitles = help.GetWatchedTitles(1)
     print(watchedTitles)
     return json.dumps(watchedTitles)
 
