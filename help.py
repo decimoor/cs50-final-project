@@ -14,9 +14,13 @@ def LoginRequired(func):
     @wraps(func)
 
     def DecoratedFunction(*args, **kwargs):
-        if flask.request.args.get("user_id"):
+        print(flask.session.get("id"))
+        if flask.session.get("id"):
             return func(*args, **kwargs)
         return flask.render_template("register.html", errmsg="No errors")
+        # above is older version 
+        # return flask.render_template("login.html", errmsg="No errors")
+        # above is new version 
 
     return DecoratedFunction
 
@@ -113,11 +117,15 @@ def CheckExisting(name):
     db = sqlconnection.cursor()
     names = db.execute(f'SELECT name FROM users').fetchall()
 
+    sqlconnection.commit()
+
+    if len(names) == 0:
+        return False
+
     for iter in names:
         if name in iter[0]:
             return True
     
-    sqlconnection.commit()
     return False
 
 def GetTitlesLike(titleName):
@@ -149,4 +157,12 @@ def AddToUnwatchedTitles(title, userId):
     db = sqlconnection.cursor()
     db.execute(f'INSERT INTO unwatched_titles (owners_id, title_id) VALUES({userId}, {title["id"]})')
     sqlconnection.commit()
+
+def CheckPassword(username, passwordToCheck):
+    sqlconnection = sqlite3.Connection("anime.db")
+    db = sqlconnection.cursor()
+    password = db.execute(f'SELECT password FROM users WHERE name = \'{username}\'').fetchall()[0][0]
+    if passwordToCheck == password:
+        return True
+    return False
 
