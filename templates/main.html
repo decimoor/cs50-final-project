@@ -1,14 +1,14 @@
 {%extends "layout.html"%}
     
     {%block link%}
+    <link rel="stylesheet" href="../static/register.css">
         <link rel="stylesheet" href="../static/main.css">
         <title>Anime Watch List</title>
     {%endblock%}
 
     {%block nav%}
-
-    <input class="m_btn" type="submit" name="accout" value="Accout" disabled>
-    <input class="m_btn log_out" type="submit" name="log_out" value="Log out">
+    <input class="m_btn" type="submit" name="accout" value="Accout" disabled style="padding-left: 0px">
+    <input class="m_btn log_out" type="submit" name="log_out" value="Log out" style="padding-left: 0px">
     {%endblock%}
 
 {%block body%}
@@ -41,6 +41,7 @@
             <!-- this div element represents whole "anime-element" -->
             <div class="border">
                 <div class="tile">
+                    <div class="user_comment_data">The best anime ever made</div>
                     <div class="photo-and-description">
                         <div class="m_image"></div>
                         <div class="short-description">
@@ -52,9 +53,13 @@
                     <div class="user_comment_inactive"></div>
                     <div class="m_more_button_inactive"></div>
                 </div>
-            </div>
+            </div>  
         </div>
+
         <h3>Unwatched</h3>
+        <div class="unwatched">
+            
+        </div>
         <div class="error">
             <p>{{errmsg}}</p>
         </div>
@@ -62,7 +67,59 @@
     </div>
 
     <div class="add-tile-button m_button">Add Title</div>
-    
+    <div class="big_black_squire"></div>
+
+    <div class="add_title_window registration-window">
+        <form action="/AddTitle" method="post">
+            <input class="m_btn anime-list-text-field" list="titles" style="width: calc(425px*0.6);
+                                        height: calc(81px*0.6);"
+                                         type="text" name="titleName" placeholder="Your Favourite Title">
+            <datalist class="m_btn" name="f" id="titles" style="width: calc(485px*0.6);
+                                                        height: calc(81px*0.6);">
+                <option value="Hunter X Hunter">Hunter X Hunter</option>
+                <option value="Shaman King">Shaman King</option>
+                <option value="Naruto">Naruto</option>
+                <option value="Toro Doro">Toro Doro</option>
+                <option value="Your mom's ass">You mom's ass</option>
+                
+            </datalist>
+            <input class="m_btn" style="width: calc(425px*0.6);
+                                        height: calc(81px*0.6);"
+                                        type="text" name="rating" placeholder="Your Mark">
+            <input class="m_btn" style="width: calc(618px*0.6);
+                                        height: calc(276px*0.6);"
+                                        type="text" name="description" placeholder="Description">
+            <input class="m_btn" style="width: calc(354px*0.6);
+                                        height: calc(94px*0.6);
+                                        background-color: #FFDD00;
+                                        color: #FF7E00;
+                                        padding-left: 0px;
+                                        font-size: 1.3rem;
+                                        margin-top: 12px;"
+                                        type="submit" name="Add" value="Add">
+            <div style="display: flex;
+                        flex-direction: row;
+                        margin-top: 10px;
+                        align-items: center;
+                        justify-content: center;
+                        overflow: visible;">
+                <p style="color: #5e3e00">Watched</p>
+                <label class="custom-radio-button m_btn">
+                    <input type="radio" name="mode" value="watched" style="border-radius: 0px;
+                                                                                        box-shadow: none;">
+                    <span class="checkmark"></span>
+                </label>
+                
+                <p style="color: #5e3e00">Unseen</p>
+                <label class="custom-radio-button m_btn">
+
+                    <input type="radio" class="m_btn" name="mode" value="unwatched" style="border-radius: 0px;
+                                                                   box-shadow: none;">
+                    <span class="checkmark"></span>
+                </label>
+            </div>    
+        </form> 
+    </div>
 
     {%endblock%}
 {%block scripts%}

@@ -5,9 +5,7 @@
 
 body{
     width: 100vw;
-    height: 100vh;
     background: linear-gradient(180deg, #FF7B00 0%, #FFAA00 100%);
-    overflow: hidden;
 }
 
 .logo{

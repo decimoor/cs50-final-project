@@ -17,7 +17,7 @@ def LoginRequired(func):
         print(flask.session.get("id"))
         if flask.session.get("id"):
             return func(*args, **kwargs)
-        return flask.render_template("register.html", errmsg="No errors")
+        return flask.render_template("login.html", errmsg="No errors")
         # above is older version 
         # return flask.render_template("login.html", errmsg="No errors")
         # above is new version 
@@ -28,7 +28,7 @@ def LoginRequired(func):
 def GetWatchedTitles(userID):
     sqlconnection = sqlite3.Connection("anime.db")
     db = sqlconnection.cursor()
-    titles = db.execute(f'SELECT * FROM watched_titles WHERE owners_id = {userID}').fetchall()
+    titles = db.execute(f'SELECT * FROM watched_titles_base WHERE owners_id = {userID}').fetchall()
     sqlconnection.commit()
     titlesDicts = []
     for title in titles:
@@ -44,7 +44,7 @@ def GetWatchedTitles(userID):
         titlesDicts.append(titleDict)
 
 
-    # function returns a list where every element represents next dictionary
+    # function returns a list where every element represents next dictionary that consists of these elements
     # titleName
     # description
     # rating
@@ -56,7 +56,7 @@ def GetWatchedTitles(userID):
 def GetUnwatchedTitles(userID):
     sqlconnection = sqlite3.Connection("anime.db")
     db = sqlconnection.cursor()
-    titles = db.execute(f'SELECT * FROM unwatched_titles WHERE owners_id = {userID}').fetchall()
+    titles = db.execute(f'SELECT * FROM unwatched_titles_base WHERE owners_id = {userID}').fetchall()
     sqlconnection.commit()
     titlesDicts = []
     for title in titles:
@@ -147,15 +147,15 @@ def AddToWatchedTitles(title):
     sqlconnection = sqlite3.Connection("anime.db")
     db = sqlconnection.cursor()
     # !!!this is release function !!!
-    # db.execute(f'INSERT INTO watched_titles (owners_id, title_id, rating, description) VALUES({flask.session["id"]}, {title["id"]}, {title["rating"]}, {title["description"]}')
+    db.execute(f'INSERT INTO watched_titles_base (owners_id, title_id, rating, description) VALUES({flask.session["id"]}, {title["id"]}, {title["rating"]}, \'{title["description"]}\')')
     # !!! this is debug function !!!
-    db.execute(f'INSERT INTO watched_titles (owners_id, title_id, rating, description) VALUES(4, {title["id"]}, {title["rating"]}, \'{title["description"]}\')')
+    # db.execute(f'INSERT INTO watched_titles_base(owners_id, title_id, rating, description) VALUES(4, {title["id"]}, {title["rating"]}, \'{title["description"]}\')')
     sqlconnection.commit()
 
 def AddToUnwatchedTitles(title, userId):
     sqlconnection = sqlite3.Connection("anime.db")
     db = sqlconnection.cursor()
-    db.execute(f'INSERT INTO unwatched_titles (owners_id, title_id) VALUES({userId}, {title["id"]})')
+    db.execute(f'INSERT INTO unwatched_titles_base (owners_id, title_id) VALUES({userId}, {title["id"]})')
     sqlconnection.commit()
 
 def CheckPassword(username, passwordToCheck):

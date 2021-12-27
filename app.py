@@ -10,15 +10,12 @@ sqliteConnection = sqlite3.connect("anime.db")
 
 app = flask.Flask(__name__)
 
-<<<<<<< HEAD
-=======
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 flask_session.Session(app)
 
->>>>>>> login
 @app.route("/")
 @help.LoginRequired
 def main():
@@ -32,11 +29,7 @@ def main():
         return "Hello, mate!"
         # reloads page
     # returns main web page if not argiments were passed
-<<<<<<< HEAD
-    return flask.render_template("main.html", title = UNWATCHED_TITLES[0])   
-=======
-    return flask.render_template("main.html")   
->>>>>>> login
+    return flask.render_template("main.html", errmsg = "No errors")   
 
 
 # get anime list function
@@ -92,10 +85,6 @@ def registered():
     # load info to db
     flask.session["id"] = help.GetUserId(username)
     help.AddRowToUserTable(name = username, password = password, favourite_title = favouriteTitle)
-<<<<<<< HEAD
-    return flask.redirect(f"/?user_id={help.GetUserId(username)}")
-
-=======
     flask.session["id"] = help.GetUserId(username)
     return flask.redirect(f"/?user_id={help.GetUserId(username)}")
 
@@ -129,33 +118,22 @@ def Loginned():
 
     return flask.render_template("login.html", errmsg = "You entered wrong password")
 
->>>>>>> login
 
 @app.route("/getTitles", methods = ["POST", "GET"])
+@help.LoginRequired
 def GetTitles():
     if flask.request.form.get("mode") == "unwatched":
-        # !!! this is debug version of the function !!!
-        # the proper version of function looks this wat
-        # help.GetUnwatchedTitles(flask.session["user_id"])
-<<<<<<< HEAD
-        return str(help.GetUnwatchedTitles(4))
-    # !!! this is debug version of the function !!!
-    # the proper version of function looks this way
-    # watchedTitles = help.GetWatchedTitles(flask.session["user_id"])
-    watchedTitles = help.GetWatchedTitles(4)
-=======
-        return str(help.GetUnwatchedTitles(1))
-    # !!! this is debug version of the function !!!
-    # the proper version of function looks this way
-    # watchedTitles = help.GetWatchedTitles(flask.session["user_id"])
-    watchedTitles = help.GetWatchedTitles(1)
->>>>>>> login
-    print(watchedTitles)
-    return json.dumps(watchedTitles)
+        return json.dumps(help.GetUnwatchedTitles(flask.session["id"]))
+    if flask.request.form.get("mode") == "watched":
+        watchedTitles = help.GetWatchedTitles(flask.session["id"])
+        print(watchedTitles)
+        return json.dumps(watchedTitles)
 
+    return "Didn't get type of anime (watched or unwatched)"
 
 
 @app.route("/AddTitle", methods = ["POST", "GET"])
+@help.LoginRequired
 def AddTitle():
     
     
@@ -174,9 +152,9 @@ def AddTitle():
     # check if there is a rating and description (available only if it's watched title)
     if flask.request.form.get("mode") == "watched":
         if not flask.request.form.get("rating"):
-            return flask.redirect("/main?errmsg=You didn't select rating")
+            return flask.render_template("main.html", errmsg = "You didn't write select rating")
         if not flask.request.form.get("description"):
-            return flask.redirect("/main?errmsg=You didn't write description")
+            return flask.render_template("main.html", errmsg = "You didn't write description")
         # adding this title to user's watched titles database
         title = {
             "id": titleInfo[0],
@@ -185,14 +163,12 @@ def AddTitle():
             "description": flask.request.form.get("description")
         }
         help.AddToWatchedTitles(title)
-        return "Successfully added title to watched titles"
+        return flask.redirect("/")
     if flask.request.form.get("mode") == "unwatched":
         title = {
             "id": titleInfo[0],
             "name": titleInfo[1],
         }
-        # debug version
-        help.AddToUnwatchedTitles(title, 4)
-        # release version
-        # help.AddToUnwatchedTitles(title, session["user_id"])
-        return "Successfully added title to unwatched titles"
+
+        help.AddToUnwatchedTitles(title, flask.session["id"])
+        return flask.render_template("main.html", errmsg = "No errors")
