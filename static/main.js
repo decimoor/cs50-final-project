@@ -121,9 +121,7 @@ $(".anime-list-text-field").keyup(function(){
                 titles = $.parseJSON(listOfAnime)
                 for (title in titles)
                 {
-                    // <option value="Hunter X Hunter">Hunter X Hunter</option>
                     option = `<option value=\"${titles[title]}\">${titles[title]}</option>`
-                    // adding option string into data list
                     $("datalist").append(option)
                 }
             }
