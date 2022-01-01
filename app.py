@@ -83,7 +83,6 @@ def registered():
     if password in ["Alim", "Petya"]:
         flask.redirect("/register?errmsg=Your names sucks pls change")
     # load info to db
-    flask.session["id"] = help.GetUserId(username)
     help.AddRowToUserTable(name = username, password = password, favourite_title = favouriteTitle)
     flask.session["id"] = help.GetUserId(username)
     return flask.redirect(f"/?user_id={help.GetUserId(username)}")
